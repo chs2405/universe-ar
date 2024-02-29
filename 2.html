@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Stage</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Metrophobic&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Metrophobic&amp;display=swap"
       rel="stylesheet"
     />
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <!-- we import arjs version without NFT but with marker + location based support -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <link rel="stylesheet" href="style.css" />
     <script>
+      //////////////////////////////////////////////////////
       window.addEventListener("load", () => {
-        const stage = "Stage2";
+        const stage = "Stage1";
         document.getElementById("stage").innerHTML = stage;
         const marker = document.querySelectorAll("a-marker");
         const marker1 = marker[0];
@@ -82,8 +88,29 @@
       embedded
       arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
     >
-      <a-marker markerhandler type="barcode" value="7"> </a-marker>
-      <a-marker markerhandler type="barcode" value="8"> </a-marker>
+      <a-assets>
+        <a-asset-item
+          id="planet1-asset"
+          src="./model/jupiter.glb"
+        ></a-asset-item>
+      </a-assets>
+      <a-assets>
+        <a-asset-item id="planet2-asset" src="./model/sun.glb"></a-asset-item>
+      </a-assets>
+      <a-marker markerhandler type="barcode" value="7">
+        <a-entity
+          gltf-model="#planet1-asset"
+          animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing:linear"
+        >
+        </a-entity
+      ></a-marker>
+      <a-marker markerhandler type="barcode" value="8"
+        ><a-entity
+          gltf-model="#planet2-asset"
+          animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing:linear"
+        >
+        </a-entity>
+      </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
   </body>
