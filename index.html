@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="style.css" />
     <script>
       window.addEventListener("load", () => {
+        const stage = "Stage1";
+        document.getElementById("stage").innerHTML = stage;
         const marker = document.querySelectorAll("a-marker");
         const marker1 = marker[0];
         const marker2 = marker[1];
@@ -57,19 +59,22 @@
     </script>
   </head>
   <body>
+    <h1 id="stage"></h1>
     <div class="textbox">
       The distance between&nbsp;<span class="p-box1"></span>&nbsp;and&nbsp;
-      <span class="p-box2"></span>&nbsp;is: &nbsp;<span id="distance"> 0 </span
+      <span class="p-box2"></span>&nbsp;is:&nbsp;<span id="distance"> 0 </span
       >&nbsp;km?
     </div>
     <div class="block">
       <h1>Congrats! You found the correct distance!</h1>
       <h1>
-        The distance between &nbsp;<span class="p-box1"></span>&nbsp;and&nbsp;
-        <span class="p-box2"></span>&nbsp;is:
+        The distance between&nbsp;<span class="p-box1"></span
+        >&nbsp;and&nbsp;<span class="p-box2"></span>&nbsp;is:
       </h1>
       <h1><span id="finalD"></span>km</h1>
-      <button onclick="document.location='2.html'">Next Stage</button>
+      <button class="next-button" onclick="document.location='2.html'">
+        Next Stage
+      </button>
     </div>
     <a-scene
       vr-mode-ui="enabled: false;"

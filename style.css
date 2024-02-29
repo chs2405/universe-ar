@@ -18,8 +18,8 @@ body {
   height: 10%;
   text-align: center;
   z-index: 1;
-  color: black;
-  background-color: white;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,18 +27,42 @@ body {
 .block {
   height: 100%;
   position: absolute;
-  background-color: white;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(21, 21, 22, 1) 56%,
+    rgba(37, 37, 39, 1) 100%
+  );
+  color: white;
   width: 100%;
   top: 0;
   transform: translateY(-100%);
   z-index: 100;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
 }
 #distance,
 .p-box1,
-.p-box2 {
+.p-box2,
+#finalD {
   font-weight: bold;
+  font-size: larger;
+}
+#stage {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.next-button {
+  font-size: large;
+  font-family: "Metrophobic", sans-serif;
+  outline: inherit;
+  border-radius: 9px;
+  height: 50px;
+  width: 200px;
+  cursor: pointer;
 }
