@@ -1,1 +1,90 @@
-hi
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Metrophobic&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- we import arjs version without NFT but with marker + location based support -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      window.addEventListener("load", () => {
+        const stage = "Stage2";
+        document.getElementById("stage").innerHTML = stage;
+        const marker = document.querySelectorAll("a-marker");
+        const marker1 = marker[0];
+        const marker2 = marker[1];
+        const answer = 380000;
+        const planet1 = "Earth";
+        const planet2 = "Moon";
+        var planet1name = document.getElementsByClassName("p-box1");
+        var planet2name = document.getElementsByClassName("p-box2");
+        for (var i = planet1name.length - 1; i >= 0; i--) {
+          planet1name[i].innerHTML = planet1;
+        }
+        for (var i = planet2name.length - 1; i >= 0; i--) {
+          planet2name[i].innerHTML = planet2;
+        }
+        let check;
+        marker1.addEventListener("markerFound", () => {
+          let marker1Position = marker1.object3D.position;
+          let marker2Position = marker2.object3D.position;
+          let distance = marker1Position.distanceTo(marker2Position);
+
+          check = setInterval(() => {
+            marker1Position = marker1.object3D.position;
+            marker2Position = marker2.object3D.position;
+
+            distance = marker1Position.distanceTo(marker2Position);
+
+            // do what you want with the distance:
+            let finaldistance = distance.toFixed(1) * 100000;
+            document.getElementById("distance").innerHTML = finaldistance;
+            if (finaldistance == answer) {
+              document.getElementById("finalD").innerHTML = finaldistance;
+              gsap.to(".block", { y: 0 });
+            }
+          }, 100);
+        });
+
+        marker1.addEventListener("markerLost", () => {
+          clearInterval(check);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1 id="stage"></h1>
+    <div class="textbox">
+      The distance between&nbsp;<span class="p-box1"></span>&nbsp;and&nbsp;
+      <span class="p-box2"></span>&nbsp;is:&nbsp;<span id="distance"> 0 </span
+      >&nbsp;km?
+    </div>
+    <div class="block">
+      <h1>Congrats! You found the correct distance!</h1>
+      <h1>
+        The distance between&nbsp;<span class="p-box1"></span
+        >&nbsp;and&nbsp;<span class="p-box2"></span>&nbsp;is:
+      </h1>
+      <h1><span id="finalD"></span>km</h1>
+      <button class="next-button" onclick="document.location='finish.html'">
+        Next Stage
+      </button>
+    </div>
+    <a-scene
+      vr-mode-ui="enabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
+      embedded
+      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+    >
+      <a-marker markerhandler type="barcode" value="7"> </a-marker>
+      <a-marker markerhandler type="barcode" value="8"> </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
