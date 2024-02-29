@@ -1,0 +1,14 @@
+{
+  "stages": [
+    {
+      "name": "第一关",
+      "planets": ["Earth", "Moon"],
+      "answer": 380000
+    },
+    {
+      "name": "第2关",
+      "planets": ["Mars", "Sun"],
+      "answer": 750000
+    }
+  ]
+}

@@ -11,75 +11,26 @@
       rel="stylesheet"
     />
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <!-- we import arjs version without NFT but with marker + location based support -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <link rel="stylesheet" href="style.css" />
-    <script>
-      //////////////////////////////////////////////////////
-      window.addEventListener("load", () => {
-        const stage = "Stage1";
-        document.getElementById("stage").innerHTML = stage;
-        const marker = document.querySelectorAll("a-marker");
-        const marker1 = marker[0];
-        const marker2 = marker[1];
-        const answer = 380000;
-        const planet1 = "Earth";
-        const planet2 = "Moon";
-        var planet1name = document.getElementsByClassName("p-box1");
-        var planet2name = document.getElementsByClassName("p-box2");
-        for (var i = planet1name.length - 1; i >= 0; i--) {
-          planet1name[i].innerHTML = planet1;
-        }
-        for (var i = planet2name.length - 1; i >= 0; i--) {
-          planet2name[i].innerHTML = planet2;
-        }
-        let check;
-        marker1.addEventListener("markerFound", () => {
-          let marker1Position = marker1.object3D.position;
-          let marker2Position = marker2.object3D.position;
-          let distance = marker1Position.distanceTo(marker2Position);
-
-          check = setInterval(() => {
-            marker1Position = marker1.object3D.position;
-            marker2Position = marker2.object3D.position;
-
-            distance = marker1Position.distanceTo(marker2Position);
-
-            // do what you want with the distance:
-            let finaldistance = distance.toFixed(1) * 100000;
-            document.getElementById("distance").innerHTML = finaldistance;
-            if (finaldistance == answer) {
-              document.getElementById("finalD").innerHTML = finaldistance;
-              gsap.to(".block", { y: 0 });
-            }
-          }, 100);
-        });
-
-        marker1.addEventListener("markerLost", () => {
-          clearInterval(check);
-        });
-      });
-    </script>
   </head>
   <body>
     <h1 id="stage"></h1>
     <div class="textbox">
-      The distance between&nbsp;<span class="p-box1"></span>&nbsp;and&nbsp;
-      <span class="p-box2"></span>&nbsp;is:&nbsp;<span id="distance"> 0 </span
+      <span class="p-box1"></span>&nbsp;和&nbsp;
+      <span class="p-box2"></span>&nbsp;之间的距离是:&nbsp;<span id="distance">
+        0 </span
       >&nbsp;km?
     </div>
     <div class="block">
-      <h1>Congrats! You found the correct distance!</h1>
+      <h1>恭喜! 你找到了正确的距离!</h1>
       <h1>
-        The distance between&nbsp;<span class="p-box1"></span
-        >&nbsp;and&nbsp;<span class="p-box2"></span>&nbsp;is:
+        <span class="p-box1"></span>&nbsp;和&nbsp;<span class="p-box2"></span
+        >&nbsp;之间的距离是:
       </h1>
       <h1><span id="finalD"></span>km</h1>
-      <button class="next-button" onclick="document.location='2.html'">
-        Next Stage
-      </button>
+      <button class="next-button" onclick="">下一关</button>
     </div>
     <a-scene
       vr-mode-ui="enabled: false;"
@@ -88,26 +39,39 @@
       arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
     >
       <a-assets>
-        <a-asset-item id="planet1-asset" src="./model/earth.glb"></a-asset-item>
-      </a-assets>
-      <a-assets>
-        <a-asset-item id="planet2-asset" src="./model/moon.glb"></a-asset-item>
+        <a-asset-item id="Earth-asset" src="./model/Earth.glb"></a-asset-item>
+        <a-asset-item id="Moon-asset" src="./model/Moon.glb"></a-asset-item>
+        <a-asset-item id="Mars-asset" src="./model/mars.glb"></a-asset-item>
+        <a-asset-item
+          id="Jupiter-asset"
+          src="./model/jupiter.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="Mercury-asset"
+          src="./model/mercury.glb"
+        ></a-asset-item>
+        <a-asset-item id="Venus-asset" src="./model/venus.glb"></a-asset-item>
+        <a-asset-item id="Saturn-asset" src="./model/saturn.glb"></a-asset-item>
+        <a-asset-item id="Uranus-asset" src="./model/uranus.glb"></a-asset-item>
+        <a-asset-item id="Pluto-asset" src="./model/pluto.glb"></a-asset-item>
+        <a-asset-item id="Sun-asset" src="./model/sun.glb"></a-asset-item>
       </a-assets>
       <a-marker markerhandler type="barcode" value="7">
         <a-entity
-          gltf-model="#planet1-asset"
+          id="planet1-model"
           animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing:linear"
         >
         </a-entity
       ></a-marker>
       <a-marker markerhandler type="barcode" value="8"
         ><a-entity
-          gltf-model="#planet2-asset"
+          id="planet2-model"
           animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing:linear"
         >
         </a-entity>
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
+    <script src="./app.js"></script>
   </body>
 </html>
