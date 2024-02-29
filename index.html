@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <!-- we import arjs version without NFT but with marker + location based support -->
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script>
+    window.addEventListener("load", () => {
+      const marker = document.querySelectorAll("a-marker");
+      const marker1 = marker[0];
+      const marker2 = marker[1];
+      let check;
+      marker1.addEventListener("markerFound", () => {
+        let marker1Position = marker1.object3D.position;
+        let marker2Position = marker2.object3D.position;
+        let distance = marker1Position.distanceTo(marker2Position);
+
+        check = setInterval(() => {
+          marker1Position = marker1.object3D.position;
+          marker2Position = marker2.object3D.position;
+
+          distance = marker1Position.distanceTo(marker2Position);
+
+          // do what you want with the distance:
+          let finaldistance = distance.toFixed(1) * 100000;
+          document.getElementById("distance").innerHTML = finaldistance;
+          if (finaldistance == 380000) {
+            document.getElementById("distance").innerHTML = "success!";
+          }
+        }, 100);
+      });
+
+      marker.addEventListener("markerLost", () => {
+        clearInterval(check);
+      });
+    });
+  </script>
+  <body style="margin: 0px; overflow: hidden">
+    <div
+      style="
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        height: 200px;
+        text-align: center;
+        z-index: 1;
+        color: black;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <span id="distance">0</span>km
+    </div>
+    <a-scene
+      vr-mode-ui="enabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
+      embedded
+      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
+    >
+      <a-marker markerhandler type="barcode" value="7"> </a-marker>
+      <a-marker markerhandler type="barcode" value="8"> </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
