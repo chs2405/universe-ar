@@ -71,6 +71,9 @@ window.addEventListener("load", () => {
   marker1.addEventListener("markerLost", () => {
     clearInterval(check);
   });
+  marker2.addEventListener("markerLost", () => {
+    clearInterval(check);
+  });
 
   const nextButton = document.querySelector(".next-button");
   nextButton.addEventListener("click", async () => {

@@ -3,7 +3,7 @@
     {
       "name": "第1关",
       "planets": [
-        ["Earth", "Moon"],
+        ["Sun", "Moon"],
         ["地球", "月亮"]
       ],
       "answer": 380000
