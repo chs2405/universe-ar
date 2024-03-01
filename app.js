@@ -1,5 +1,7 @@
-window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
   console.log("loaded");
+});
+window.addEventListener("load", () => {
   let stageIndex = 0;
   let check;
   let stageAnswer;
