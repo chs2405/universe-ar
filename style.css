@@ -66,3 +66,48 @@ body {
   width: 200px;
   cursor: pointer;
 }
+.loading-page {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(21, 21, 22, 1) 56%,
+    rgba(37, 37, 39, 1) 100%
+  );
+  z-index: 1001;
+  color: #fff;
+  transform: translateY(-100%);
+}
+.loading-page h1 {
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  transform: translate(-50%, -70%);
+}
+#container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 40px;
+  display: block;
+  font-size: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.loading-dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  display: inline-block;
+  position: relative;
+  left: -60px;
+  margin-right: 20px;
+}

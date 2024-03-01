@@ -1,9 +1,14 @@
 AFRAME.registerComponent("foo", {
   init: function () {
     // This will be called after the entity has properly attached and loaded.
-    console.log("I am ready!");
+    gsap.to("#loading-page", { y: 0 });
   },
 });
+var tl = new TimelineMax({
+  repeat: -1,
+});
+
+tl.staggerFromTo(".loading-dot", 0.5, { x: 0 }, { x: 60 }, -0.15);
 window.addEventListener("load", () => {
   let stageIndex = 0;
   let check;
