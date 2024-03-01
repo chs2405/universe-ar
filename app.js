@@ -1,3 +1,9 @@
+AFRAME.registerComponent("foo", {
+  init: function () {
+    // This will be called after the entity has properly attached and loaded.
+    console.log("I am ready!");
+  },
+});
 window.addEventListener("load", () => {
   let stageIndex = 0;
   let check;
@@ -8,8 +14,6 @@ window.addEventListener("load", () => {
       const response = await fetch("data.json");
       const data = await response.json();
       const stages = data.stages;
-      numberOfStages = stages.length;
-      console.log(numberOfStages);
       const stage = stages[stageIndex];
       const stageName = stage.name;
       const planets = stage.planets;
@@ -39,11 +43,6 @@ window.addEventListener("load", () => {
       document
         .getElementById("planet2-model")
         .setAttribute("gltf-model", "#" + planet2 + "-asset");
-      var scene = document.querySelector("a-scene");
-
-      if (scene.hasLoaded) {
-        console.log("loaded");
-      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
