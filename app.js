@@ -1,6 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("loaded");
-});
 window.addEventListener("load", () => {
   let stageIndex = 0;
   let check;
@@ -42,6 +39,11 @@ window.addEventListener("load", () => {
       document
         .getElementById("planet2-model")
         .setAttribute("gltf-model", "#" + planet2 + "-asset");
+      var scene = document.querySelector("a-scene");
+
+      if (scene.hasLoaded) {
+        console.log("loaded");
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
