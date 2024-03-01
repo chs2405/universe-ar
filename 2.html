@@ -18,7 +18,7 @@
   <body>
     <h1 id="stage"></h1>
     <div class="textbox">
-      <button>changeModel</button>
+      <button onclick="changeModel()">changeModel</button>
       <span class="p-box1"></span>&nbsp;和&nbsp;
       <span class="p-box2"></span>&nbsp;之间的距离是:&nbsp;<span id="distance">
         0 </span
@@ -33,6 +33,7 @@
       <h1><span id="finalD"></span>km</h1>
       <button class="next-button" onclick="">下一关</button>
     </div>
+
     <a-scene
       foo
       vr-mode-ui="enabled: false;"
@@ -41,8 +42,8 @@
       arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
     >
       <a-assets>
-        <a-asset-item id="Earth-asset" src="./model/Earth.glb"></a-asset-item>
-        <a-asset-item id="Moon-asset" src="./model/Moon.glb"></a-asset-item>
+        <a-asset-item id="Earth-asset" src="./model/earth.glb"></a-asset-item>
+        <a-asset-item id="Moon-asset" src="./model/moon.glb"></a-asset-item>
         <a-asset-item id="Mars-asset" src="./model/mars.glb"></a-asset-item>
         <a-asset-item
           id="Jupiter-asset"
@@ -69,16 +70,12 @@
       <a-entity camera></a-entity>
     </a-scene>
     <script>
-      AFRAME.registerComponent("foo", {
-        init: function () {
-          const nextButton = document.getElementsByClassName("next-button");
-          const model = document.getElementById("planet2-model");
-          const changeModel = () => {
-            console.log("changed");
-          };
-          nextButton.onclick = changeModel;
-        },
-      });
+      function changeModel() {
+        document.getElementById("planet2-model").removeAttribute("gltf-model");
+        document
+          .getElementById("planet2-model")
+          .setAttribute("gltf-model", "#Moon-asset");
+      }
     </script>
   </body>
 </html>

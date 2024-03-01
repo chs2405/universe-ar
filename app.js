@@ -27,10 +27,11 @@ window.addEventListener("load", () => {
       for (var i = planet2name.length - 1; i >= 0; i--) {
         planet2name[i].innerHTML = planet2;
       }
+      document.getElementById("planet1-model").removeAttribute("gltf-model");
       document
         .getElementById("planet1-model")
         .setAttribute("gltf-model", "#" + planet1 + "-asset");
-      console.log(document.getElementById("planet1-model"));
+      document.getElementById("planet2-model").removeAttribute("gltf-model");
       document
         .getElementById("planet2-model")
         .setAttribute("gltf-model", "#" + planet2 + "-asset");
