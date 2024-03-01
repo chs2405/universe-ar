@@ -1,4 +1,5 @@
 window.addEventListener("load", () => {
+  console.log("loaded");
   let stageIndex = 0;
   let check;
   let stageAnswer;
