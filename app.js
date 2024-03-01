@@ -1,7 +1,7 @@
 AFRAME.registerComponent("foo", {
   init: function () {
     // This will be called after the entity has properly attached and loaded.
-    gsap.to("#loading-page", { y: 0 });
+    gsap.to(".loading-page", { y: "-100%" });
   },
 });
 var tl = new TimelineMax({

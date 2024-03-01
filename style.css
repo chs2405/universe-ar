@@ -81,7 +81,6 @@ body {
   );
   z-index: 1001;
   color: #fff;
-  transform: translateY(-100%);
 }
 .loading-page h1 {
   position: absolute;
