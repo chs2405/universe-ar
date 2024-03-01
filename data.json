@@ -2,12 +2,18 @@
   "stages": [
     {
       "name": "第1关",
-      "planets": ["Earth", "Moon"],
+      "planets": [
+        ["Earth", "Moon"],
+        ["地球", "月亮"]
+      ],
       "answer": 380000
     },
     {
       "name": "第2关",
-      "planets": ["Mars", "Sun"],
+      "planets": [
+        ["Mars", "Sun"],
+        ["火星", "太阳"]
+      ],
       "answer": 750000
     }
   ]
