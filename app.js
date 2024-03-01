@@ -16,16 +16,18 @@ window.addEventListener("load", () => {
       document.getElementById("finalD").innerHTML = answer;
       document.getElementById("stage").innerHTML = stageName;
 
-      const planet1 = planets[0];
-      const planet2 = planets[1];
+      const planet1 = planets[0][0];
+      const planet2 = planets[0][1];
+      const planet1c = planets[1][0];
+      const planet2c = planets[1][1];
 
       var planet1name = document.getElementsByClassName("p-box1");
       var planet2name = document.getElementsByClassName("p-box2");
       for (var i = planet1name.length - 1; i >= 0; i--) {
-        planet1name[i].innerHTML = planet1;
+        planet1name[i].innerHTML = planet1c;
       }
       for (var i = planet2name.length - 1; i >= 0; i--) {
-        planet2name[i].innerHTML = planet2;
+        planet2name[i].innerHTML = planet2c;
       }
       document.getElementById("planet1-model").removeAttribute("gltf-model");
       document
