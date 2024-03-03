@@ -3,18 +3,57 @@
     {
       "name": "第1关",
       "planets": [
-        ["Sun", "Moon"],
+        ["Earth", "Moon"],
+
         ["地球", "月亮"]
       ],
+
       "answer": 380000
     },
+
     {
       "name": "第2关",
+
       "planets": [
         ["Mars", "Sun"],
+
         ["火星", "太阳"]
       ],
+
       "answer": 750000
+    },
+    {
+      "name": "第3关",
+
+      "planets": [
+        ["Mercury", "Sun"],
+
+        ["水星", "太阳"]
+      ],
+
+      "answer": 540000
+    },
+    {
+      "name": "第4关",
+
+      "planets": [
+        ["Nepture", "Sun"],
+
+        ["海王星", "太阳"]
+      ],
+
+      "answer": 4500000000
+    },
+    {
+      "name": "第5关",
+
+      "planets": [
+        ["Earth", "Sun"],
+
+        ["地球", "太阳"]
+      ],
+
+      "answer": 150000000
     }
   ]
 }
