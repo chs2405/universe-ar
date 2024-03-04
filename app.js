@@ -19,6 +19,7 @@ window.addEventListener("load", () => {
       const response = await fetch("data.json");
       const data = await response.json();
       const stages = data.stages;
+      numberOfStages = stages.length;
       const stage = stages[stageIndex];
       const stageName = stage.name;
       const planets = stage.planets;
@@ -67,29 +68,12 @@ window.addEventListener("load", () => {
       marker2Position = marker2.object3D.position;
       distance = marker1Position.distanceTo(marker2Position).toFixed(1) * 10;
       let numStr = stageAnswer.toString();
-
-      // 取前两位数字
-      let firstTwoDigits = parseInt(numStr.substring(0, 2));
-
-      // 取剩下的数字
-      let remainingDigits = parseInt(numStr.substring(2));
-      // if (stageAnswer > 750000) {
-      //   let finaldistance = distance.toFixed(1) * 100000000;
-      //   document.getElementById("distance").innerHTML = finaldistance;
-      //   // 使用范围来比较解决方案和距离
-      //   if (Math.abs(finaldistance - stageAnswer) <= 0.1) {
-      //     gsap.to(".block", { y: 0 });
-      //   }
-      // } else {
-      //   // do what you want with the distance:
-      //   let finaldistance = distance.toFixed(1) * 100000;
-      //   document.getElementById("distance").innerHTML = finaldistance;
-      //   // 使用范围来比较解决方案和距离
-      //   if (Math.abs(finaldistance - stageAnswer) <= 0.1) {
-      //     gsap.to(".block", { y: 0 });
-      //   }
-      // }
-      document.getElementById("distance").innerHTML = remainingDigits;
+      let remainingDigits = numStr.substring(2);
+      let finaldistance = parseInt(distance + remainingDigits);
+      document.getElementById("distance").innerHTML = finaldistance;
+      if (Math.abs(finaldistance - stageAnswer) <= 0.1) {
+        gsap.to(".block", { y: 0 });
+      }
     }, 100);
   });
 
@@ -107,6 +91,7 @@ window.addEventListener("load", () => {
     if (stageIndex === numberOfStages) {
       document.location = "finish.html";
     } else {
+      console.log(stageIndex + " " + numberOfStages);
       await fetchData();
     }
   });
