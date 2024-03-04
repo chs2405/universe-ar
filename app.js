@@ -12,7 +12,7 @@ tl.staggerFromTo(".loading-dot", 0.5, { x: 0 }, { x: 60 }, -0.15);
 window.addEventListener("load", () => {
   let stageIndex = 0;
   let check;
-  let stageAnswer;
+  let stageAnswer = 10000000;
   var numberOfStages;
   const fetchData = async () => {
     try {
@@ -65,15 +65,31 @@ window.addEventListener("load", () => {
     check = setInterval(() => {
       marker1Position = marker1.object3D.position;
       marker2Position = marker2.object3D.position;
-      distance = marker1Position.distanceTo(marker2Position);
+      distance = marker1Position.distanceTo(marker2Position).toFixed(1) * 10;
+      let numStr = stageAnswer.toString();
 
-      // do what you want with the distance:
-      let finaldistance = distance.toFixed(1) * 100000;
-      document.getElementById("distance").innerHTML = finaldistance;
-      // 使用范围来比较解决方案和距离
-      if (Math.abs(finaldistance - stageAnswer) <= 0.1) {
-        gsap.to(".block", { y: 0 });
-      }
+      // 取前两位数字
+      let firstTwoDigits = parseInt(numStr.substring(0, 2));
+
+      // 取剩下的数字
+      let remainingDigits = parseInt(numStr.substring(2));
+      // if (stageAnswer > 750000) {
+      //   let finaldistance = distance.toFixed(1) * 100000000;
+      //   document.getElementById("distance").innerHTML = finaldistance;
+      //   // 使用范围来比较解决方案和距离
+      //   if (Math.abs(finaldistance - stageAnswer) <= 0.1) {
+      //     gsap.to(".block", { y: 0 });
+      //   }
+      // } else {
+      //   // do what you want with the distance:
+      //   let finaldistance = distance.toFixed(1) * 100000;
+      //   document.getElementById("distance").innerHTML = finaldistance;
+      //   // 使用范围来比较解决方案和距离
+      //   if (Math.abs(finaldistance - stageAnswer) <= 0.1) {
+      //     gsap.to(".block", { y: 0 });
+      //   }
+      // }
+      document.getElementById("distance").innerHTML = remainingDigits;
     }, 100);
   });
 
