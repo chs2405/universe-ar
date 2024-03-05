@@ -9,6 +9,7 @@ var tl = new TimelineMax({
 });
 
 tl.staggerFromTo(".loading-dot", 0.5, { x: 0 }, { x: 60 }, -0.15);
+gsap.from("#showText", { opacity: 0 }, +3);
 window.addEventListener("load", () => {
   let stageIndex = 0;
   let check;
