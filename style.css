@@ -27,13 +27,8 @@ body {
 .block {
   height: 100%;
   position: absolute;
-  background: rgb(0, 0, 0);
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(21, 21, 22, 1) 56%,
-    rgba(37, 37, 39, 1) 100%
-  );
+  background: #262628;
+  background: radial-gradient(at center top, #262628, #010101);
   color: white;
   width: 100%;
   top: 0;
@@ -76,13 +71,8 @@ button {
   position: absolute;
   top: 0;
   left: 0;
-  background: rgb(0, 0, 0);
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(21, 21, 22, 1) 56%,
-    rgba(37, 37, 39, 1) 100%
-  );
+  background: #262628;
+  background: radial-gradient(at center top, #262628, #010101);
   z-index: 1001;
   color: #fff;
 }
