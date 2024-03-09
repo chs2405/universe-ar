@@ -11,10 +11,11 @@ var tl = new TimelineMax({
 tl.staggerFromTo(".loading-dot", 0.5, { x: 0 }, { x: 60 }, -0.15);
 gsap.from("#showText", { opacity: 0 }, +3);
 window.addEventListener("load", () => {
-  let stageIndex = 0;
-  let check;
-  let stageAnswer = 10000000;
-  var numberOfStages;
+  var stageIndex = 0; //current stage
+  var numberOfStages; //remaining stage
+  var stageAnswer = 1;
+  var remainingDigits = 1;
+  var check;
   const fetchData = async () => {
     try {
       const response = await fetch("data.json");
@@ -26,6 +27,12 @@ window.addEventListener("load", () => {
       const planets = stage.planets;
       const answer = stage.answer;
       stageAnswer = answer;
+      if (stageIndex == 1 || stageIndex == 4) {
+        remainingDigits = parseInt("1" + answer.toString().substring(3));
+      } else {
+        remainingDigits = parseInt("1" + answer.toString().substring(2));
+      }
+      console.log(remainingDigits);
       document.getElementById("finalD").innerHTML = answer;
       document.getElementById("stage").innerHTML = stageName;
 
@@ -50,6 +57,17 @@ window.addEventListener("load", () => {
       document
         .getElementById("planet2-model")
         .setAttribute("gltf-model", "#" + planet2 + "-asset");
+      if (stageIndex == 3) {
+        document
+          .getElementById("planet2-model")
+          .setAttribute("scale", { x: 0.3, y: 0.3, z: 0.3 });
+        document
+          .getElementById("planet1-model")
+          .setAttribute("scale", { x: 0.1, y: 0, z: 0.1 });
+      } else {
+        document.getElementById("planet2-model").removeAttribute("scale");
+        document.getElementById("planet1-model").removeAttribute("scale");
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -60,17 +78,13 @@ window.addEventListener("load", () => {
   const marker2 = marker[1];
 
   marker1.addEventListener("markerFound", () => {
-    let marker1Position = marker1.object3D.position;
-    let marker2Position = marker2.object3D.position;
-    let distance = marker1Position.distanceTo(marker2Position);
-
     check = setInterval(() => {
-      marker1Position = marker1.object3D.position;
-      marker2Position = marker2.object3D.position;
-      distance = marker1Position.distanceTo(marker2Position).toFixed(1) * 10;
-      let numStr = stageAnswer.toString();
-      let remainingDigits = numStr.substring(2);
-      let finaldistance = parseInt(distance + remainingDigits);
+      let marker1Position = marker1.object3D.position;
+      let marker2Position = marker2.object3D.position;
+      var distance =
+        marker1Position.distanceTo(marker2Position).toFixed(1) * 10;
+      finaldistance = distance * remainingDigits;
+      console.log(distance);
       document.getElementById("distance").innerHTML = finaldistance;
       if (Math.abs(finaldistance - stageAnswer) <= 0.1) {
         gsap.to(".block", { y: 0 });
@@ -80,9 +94,13 @@ window.addEventListener("load", () => {
 
   marker1.addEventListener("markerLost", () => {
     clearInterval(check);
+    distance = 0;
+    document.getElementById("distance").innerHTML = 0;
   });
   marker2.addEventListener("markerLost", () => {
     clearInterval(check);
+    distance = 0;
+    document.getElementById("distance").innerHTML = 0;
   });
 
   const nextButton = document.querySelector(".next-button");
@@ -92,7 +110,6 @@ window.addEventListener("load", () => {
     if (stageIndex === numberOfStages) {
       document.location = "finish.html";
     } else {
-      console.log(stageIndex + " " + numberOfStages);
       await fetchData();
     }
   });
